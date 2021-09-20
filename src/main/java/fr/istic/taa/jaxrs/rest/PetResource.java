@@ -15,6 +15,8 @@ import io.swagger.v3.oas.annotations.Parameter;
 @Produces({"application/json", "application/xml"})
 public class PetResource {
 
+  
+	
   @GET
   @Path("/{petId}")
   public Pet getPetById(@PathParam("petId") Long petId)  {
