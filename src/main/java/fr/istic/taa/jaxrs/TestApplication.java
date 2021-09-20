@@ -21,8 +21,10 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import fr.istic.taa.jaxrs.rest.AppointmentResource;
 import fr.istic.taa.jaxrs.rest.PetResource;
 import fr.istic.taa.jaxrs.rest.UserResource;
+import fr.istic.taa.jaxrs.rest.WorkerResource;
 import io.swagger.v3.jaxrs2.integration.resources.OpenApiResource;
 
 public class TestApplication extends Application {
@@ -35,6 +37,8 @@ public class TestApplication extends Application {
 
         clazzes.add(PetResource.class);
         clazzes.add(UserResource.class);
+        clazzes.add(WorkerResource.class);
+        clazzes.add(AppointmentResource.class);
         clazzes.add(OpenApiResource.class);
         
 

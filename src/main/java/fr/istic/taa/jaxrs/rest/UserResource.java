@@ -1,5 +1,7 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -26,8 +28,14 @@ public class UserResource {
 	@Path("/{userId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public User getUserById(@PathParam("userId") Long userId)  {
-		//return new User();
 		return user.findOne(userId);
+	}
+	
+	@GET
+	@Path("/all")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<User> getAll()  {
+		return user.findAll();
 	}
 	
 	 @POST

@@ -25,7 +25,7 @@ public class User implements Serializable{
 	private String name;
 	private String mail;
 	private String mdp;
-	private List<Appointment> appoint = new ArrayList<Appointment>();
+	//private List<Appointment> appoint = new ArrayList<Appointment>();
 	
 	public User() {
     }
@@ -73,17 +73,17 @@ public class User implements Serializable{
 		this.mdp = mdp;
 	}
 	
-	@OneToMany(mappedBy="us", cascade=CascadeType.ALL)
+	/*@OneToMany(mappedBy="us", cascade=CascadeType.ALL)
 	@XmlElementWrapper(name = "appoints")
 	@XmlElement(name = "appoint")
-	@JsonManagedReference
+	//@JsonManagedReference
 	public List<Appointment> getAppoint() {
 		return appoint;
 	}
 
 	public void setAppoint(List<Appointment> appoint) {
 		this.appoint = appoint;
-	}
+	}*/
 
 	@Override
 	public String toString() {

@@ -70,7 +70,7 @@ public class Appointment implements Serializable {
 	@ManyToOne
 	@XmlElementWrapper(name = "uss")
 	@XmlElement(name = "us")
-	@JsonBackReference
+	//@JsonBackReference   /* Si décommenté -> n'affiche pas user */
 	public User getUs() {
 		return us;
 	}
