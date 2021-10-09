@@ -2,19 +2,12 @@ package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @XmlRootElement(name = "Appointment")
@@ -68,9 +61,6 @@ public class Appointment implements Serializable {
 	}
 	
 	@ManyToOne
-	@XmlElementWrapper(name = "uss")
-	@XmlElement(name = "us")
-	//@JsonBackReference   /* Si décommenté -> n'affiche pas user */
 	public User getUs() {
 		return us;
 	}
@@ -79,8 +69,7 @@ public class Appointment implements Serializable {
 		this.us = us;
 	}
 	
-	@OneToOne
-	@XmlElement(name="work")
+	@ManyToOne
 	public Worker getWork() {
 		return work;
 	}

@@ -1,20 +1,12 @@
 package fr.istic.taa.jaxrs.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @XmlRootElement(name = "User")
@@ -25,7 +17,6 @@ public class User implements Serializable{
 	private String name;
 	private String mail;
 	private String mdp;
-	//private List<Appointment> appoint = new ArrayList<Appointment>();
 	
 	public User() {
     }
@@ -72,18 +63,6 @@ public class User implements Serializable{
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
-	
-	/*@OneToMany(mappedBy="us", cascade=CascadeType.ALL)
-	@XmlElementWrapper(name = "appoints")
-	@XmlElement(name = "appoint")
-	//@JsonManagedReference
-	public List<Appointment> getAppoint() {
-		return appoint;
-	}
-
-	public void setAppoint(List<Appointment> appoint) {
-		this.appoint = appoint;
-	}*/
 
 	@Override
 	public String toString() {
