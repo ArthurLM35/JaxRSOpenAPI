@@ -8,7 +8,7 @@ Arthur Lalande-Marchand
 
 ## Remarque
 
-Pour récupérer le travail effectué par notre binôme, vous pouvez télécharger le projet sur la branche `master` sur le github: https://github.com/................  
+Pour récupérer le travail effectué par notre binôme, vous pouvez télécharger le projet sur la branche `main` sur le github: https://github.com/ArthurLM35/JaxRSOpenAPI
 Pour la réalisation et les tests du tp, votre machine devra avoir à disposition une base de données HSQLDB. De plus, pour ne pas qu'un utilisateur externe rencontre des complications pendant l'import de notre projet, nous avons décidé d'utiliser Maven.
   
 ## Compte-rendu
