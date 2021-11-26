@@ -71,7 +71,7 @@ public class UserResource {
 	 
 	 @DELETE
 	 @Path("/deleteall")
-	 public Response deleteAllUser() {			 
+	 public Response deleteAll() {			 
 			 	DaoUser us = new DaoUser();
 			 	for(User u1 :user.findAll()) {
 			 		us.delete(user.findOne(u1.getId()));

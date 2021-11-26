@@ -15,6 +15,7 @@ public class Appointment implements Serializable {
 
 	private long id;
 	private String date;
+	private double creneau;
 	private int lenght;
 	private User us;
 	private Worker work;
@@ -23,8 +24,9 @@ public class Appointment implements Serializable {
 	public Appointment() {
     }
 	
-	public Appointment(String date,int lenght, User us, Worker work, String desc) {
+	public Appointment(String date,int creneau, int lenght, User us, Worker work, String desc) {
 		this.date = date;
+		this.creneau= creneau;
 		this.lenght = lenght;
 		this.us = us;
 		this.work = work;
@@ -50,7 +52,16 @@ public class Appointment implements Serializable {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
+
+	@XmlElement(name = "creneau")
+	public double getCreneau() {
+		return creneau;
+	}
+
+	public void setCreneau(double creneau) {
+		this.creneau = creneau;
+	}
+
 	@XmlElement(name = "lenght")
 	public int getLenght() {
 		return lenght;
