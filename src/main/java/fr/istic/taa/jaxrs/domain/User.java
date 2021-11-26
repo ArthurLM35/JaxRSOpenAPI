@@ -19,6 +19,7 @@ public class User implements Serializable{
 	private String mdp;
 	
 	public User() {
+		
     }
 	
 	public User(String n, String m, String md){
