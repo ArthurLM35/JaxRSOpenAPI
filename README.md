@@ -1,148 +1,43 @@
-## JaxRS + openAPI
+Curtis Klomegan  
+Arthur Lalande-Marchand  
 
-1. Import this project in your IDE, 
-2. Start the database
-3. Start the database viewer
-4. Start the backend. There is a main class to start the backend
+# Rapport TP2 : Des Servlets à la notion de service Web
 
+#### Ressource: https://github.com/barais/JaxRSOpenAPI
+#### &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;https://hackmd.diverse-team.fr/s/rJKt4lSND#TPs
 
+## Remarque
 
+Pour récupérer le travail effectué par notre binôme, vous pouvez télécharger le projet sur la branche `master` sur le github: https://github.com/................  
+Pour la réalisation et les tests du tp, votre machine devra avoir à disposition une base de données HSQLDB. De plus, pour ne pas qu'un utilisateur externe rencontre des complications pendant l'import de notre projet, nous avons décidé d'utiliser Maven.
+  
+## Compte-rendu
 
-# Task Open API Integration 
+Pour rappel, le but du TP était la réalisation d'une application pour la prise de rendez-vous entre un client et un professionnel.  
+Pour cela, nous avons décider d'avoir trois entités pour représenter cette action. Notre première entité, *User*, représente la création d'un utilisateur. Elle possède plusieurs atributs: l'attribut *id*, clef primaire de notre entité, l'attribut *name*, l'attribut *mail* puis l'attribut *mdp*. La deuxième entité nommée *Worker*. Elle hérite de la classe User. Elle permet de différencier si un utilisateur est un client ou un professionnel. Pour cela, elle possède un attribut *job* qui fait réference à son travail. Notre dernière entité correspond à un rendez-vous. Elle s'apelle *Appointment*. Grâce à ses 5 attributs: l'attribut *id*, clef primaire de notre classe, l'attribut *date*, l'attibut *lenght*, l'attribut *us* qui correponds à un User (notre client), l'attribut *work* qui corresponds à un Worker (notre professionnel) puis un attribut *description*. Les getters et les setters ont été généré.   
+Il faut maitenant définir les methodes HTTP pour notre projet. Pour rappel, ces méthodes sont *GET*, *POST*, *PUT*, *PATCH*, *DELETE*, etc.  
+Nos méthodes sont définies dans les classes suivantes : AppointmentResource, UserResource et WorkerResource. Des méthodes sont identiques aux trois, par exemple, pour les GET, nous avons la fonction *getAll()* qui permet d'afficher tout les elements d'une entité. Nous avons la recherche unique grâce à l'ID ou le travail avec *getAppointmentById*, *getWorkerById*, *getWorkerByJob* ou *getUserById*. Nous avons la possibilité de lister les rendez-vous par Id ou par nom avec *getlistId* et *getlistName*.  
+Passons au POST avec la fonction pour ajouter un nouveau element *addRDV*, *addUser* ou *addWorker* où les deux dernieres verifient que l'adresse mail ne soit pas deja dans notre base de données pour effectuer l'inscription d'un nouveau utilisateur. 
+Pour finir, nous avons les DELETE avec la possibilité de supprimer soit un element d'une entité ou toute les données d'une entité avec les fonctions *deleteAppointment*, *deleteUser* et *deleteWorker* ou *deleteAll*.
 
-Now, we would like to ensure that our API can be discovered. The OpenAPI Initiative (OAI) was created by a consortium of forward-looking industry experts who recognize the immense value of standardizing on how REST APIs are described. As an open governance structure under the Linux Foundation, the OAI is focused on creating, evolving and promoting a vendor neutral description format. 
+### Test pour notre TP
 
-APIs form the connecting glue between modern applications. Nearly every application uses APIs to connect with corporate data sources, third party data services or other applications. Creating an open description format for API services that is vendor neutral, portable and open is critical to accelerating the vision of a truly connected world.
+#### &nbsp;&nbsp;&nbsp;&nbsp; Tester notre base de donnée
 
-To do this integration first, I already add a dependencies to openAPI libraries. 
+Tout d'abord, il faut lancer notre application. Pour ce faire, aller dans le fichier de votre projet. Deux fichiers sont à executer pour que votre base de donnée soit active: `run-hsqldb-server` puis `show-hsqldb`. Pour un utilisateur windows, il faut executer les fichiers de type .bat alors que pour linux les .sh. Après avoir finir la tâche précedente, un menu de lancement se lance. Il faut changer le type en sélectionnant `HSQL Database Engine Server`.  
+Notre classe *JpaTest* permet de fournir une base de données simple mais assez complète pour pouvoir faire des requètes. Dans le menu déroulant *command*, vous avez à disposition la liste des commandes à appliquer sur notre base. Le cadre en haut permet d'écrire nos requêtes. Après l'avoir écrit, cliqué sur *execute* pour qu'elle soit afficher dans notre database.
 
-```xml
-			<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2</artifactId>
-			<version>2.1.4</version>
-		</dependency>
-		<dependency>
-			<groupId>io.swagger.core.v3</groupId>
-			<artifactId>swagger-jaxrs2-servlet-initializer-v2</artifactId>
-			<version>2.1.4</version>
-		</dependency>
-```
+#### &nbsp;&nbsp;&nbsp;&nbsp; Tester sur notre localhost
 
-Next you have to add OpenAPI Resource to your application
+Pour afficher notre base de donnée sur localhost, il faut tout d'abord que HSQLDB soit lancé. Puis sur eclipse, lancer le `run as` de votre classe *RestServer.java*. Vous pouvez maintenant ouvrir sur votre navigateur le lien de votre local host [http://localhost:8080/](http://localhost:8080/) en ajoutant après la barre oblique les informations necessaire cité dans la partie *compte-rendu*. Par exemple: http://localhost:8080/user/1 qui afficher la personne (user) qui a pour id 1.  
+Cependant, seul les fonctions de type GET peuvent être appliquer sur notre localhost. Si vous voulez executer des requetes de type differents, vous pouvez utiliser *Postman*. L'application de requete est cependant differentes que pour GET. Il faut aussi écrire la requete que nous voulons executer, par exemple avec localhost:8080/user/add, puis ajouter nos elements dans le body: `{"id":null,"name":"Pierre Paul","mail":"arthur.lalande@wanadoo.fr","mdp":"adfgvd"}`. Tout les elements a mettre dans le body sont en commentaire dans notre code.
 
-Your application could be something like that. 
+Voici des exemples pour GET:  
+  
+&nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/user/1](http://localhost:8080/user/1)  
+&nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/user/all](http://localhost:8080/user/all)  
+&nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/worker/all](http://localhost:8080/worker/all)  
+&nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/appointment/all](http://localhost:8080/)  
+&nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/appointment/listIdName/Curtis%20Klomegan](http://localhost:8080/appointment/listIdName/Curtis%20Klomegan)  
 
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
-
-
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
-
-        //Your own resources. 
-        resources.add(PersonResource.class);
-....
-		return resources;
-	}
-}
-```
-
-Next start your server, you must have your api description available at [http://localhost:8080/openapi.json](http://localhost:8080/openapi.json)
-
-### Integrate Swagger UI. 
-
-Next we have to integrate Swagger UI. We will first download it.
-https://github.com/swagger-api/swagger-ui
-
-Copy dist folder content in src/main/webapp/swagger in your project. 
-
-Edit index.html file to automatically load your openapi.json file. 
-
-At the end of the index.html, your must have something like that.
-
-```js
-   // Build a system
-      const ui = SwaggerUIBundle({
-        url: "http://localhost:8080/openapi.json",
-        dom_id: '#swagger-ui',
-        
-        ...
-```
-
-Next add a new resources to create a simple http server when your try to access to http://localhost:8080/api/.
-
-This new resources can be developped as follows
-
-```java
-package app.web.rest;
-
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.util.logging.Logger;
-
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-
-@Path("/api")
-public class SwaggerResource {
-
-    private static final Logger logger = Logger.getLogger(SwaggerResource.class.getName());
-
-    @GET
-    public byte[] Get1() {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/index.html"));
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    @GET
-    @Path("{path:.*}")
-    public byte[] Get(@PathParam("path") String path) {
-        try {
-            return Files.readAllBytes(FileSystems.getDefault().getPath("src/main/webapp/swagger/"+path));
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-}
-```
-
-Add this new resources in your application
-
-```java
-@ApplicationPath("/")
-public class RestApplication extends Application {
-
-
-	@Override
-	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> resources = new HashSet<>();
-
-
-		// SWAGGER endpoints
-		resources.add(OpenApiResource.class);
-		resources.add(PersonResource.class);
-        //NEW LINE TO ADD
-		resources.add(SwaggerResource.class);
-
-		return resources;
-	}
-}
-```
-
-Restart your server and access to http://localhost:8080/api/, you should access to a swagger ui instance that provides documentation on your api. 
-
-You can follow this guide to show how you can specialise the documentation through annotations.
-
-https://github.com/swagger-api/swagger-samples/blob/2.0/java/java-resteasy-appclasses/src/main/java/io/swagger/sample/resource/PetResource.java
+## Conclusion
