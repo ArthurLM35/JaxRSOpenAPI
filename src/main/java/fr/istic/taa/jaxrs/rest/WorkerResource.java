@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fr.istic.taa.jaxrs.dao.generic.DaoWorker;
-import fr.istic.taa.jaxrs.domain.User;
 import fr.istic.taa.jaxrs.domain.Worker;
 import io.swagger.v3.oas.annotations.Parameter;
 
