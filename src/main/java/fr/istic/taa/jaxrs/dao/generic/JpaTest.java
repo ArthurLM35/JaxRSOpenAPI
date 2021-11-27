@@ -12,7 +12,7 @@ public class JpaTest {
          */
         public static void main(String[] args) {
         	
-            try {              
+            try {    //try           
             	DaoUser user = new DaoUser();
           	  DaoWorker worker = new DaoWorker();
           	  DaoAppointment appoint = new DaoAppointment();
