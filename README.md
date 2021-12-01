@@ -39,5 +39,3 @@ Voici des exemples pour GET:
 &nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/worker/all](http://localhost:8080/worker/all)  
 &nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/appointment/all](http://localhost:8080/)  
 &nbsp;&nbsp;&nbsp;&nbsp;[http://localhost:8080/appointment/listIdName/Curtis%20Klomegan](http://localhost:8080/appointment/listIdName/Curtis%20Klomegan)  
-
-## Conclusion
